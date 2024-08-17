@@ -72,3 +72,6 @@ class Commande(models.Model):
     statut = models.CharField(max_length=10, choices=STATUT_CHOIX, default='en_attente')
     # Date à laquelle la commande a été passée
     date_commande = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Commande de {self.utilisateur} le {self.date_commande}"  # Affiche un résumé de la commande
