@@ -1,0 +1,18 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du produit</title>
+</head>
+<body>
+    <h1>{{ produit.nom }}</h1>
+    <p>{{ produit.description }}</p>
+    <p>Prix : {{ produit.prix }} CFA</p>
+    <p>Stock : {{ produit.stock }}</p>
+    <img src="{{ produit.image.url }}" alt="{{ produit.nom }}">
+    <br>
+    <a href="{% url 'liste_produit' %}">Retour à la liste des produits</a>
+</body>
+</html>

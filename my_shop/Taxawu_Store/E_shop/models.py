@@ -25,7 +25,7 @@ class Produit(models.Model):
     #la fonction decimal_places gère le nombre de chiffre après la virgule.
 
     # Image associée au produit (facultative)
-    image = models.ImageField(upload_to='produits/', blank=True, null=True) # le champ immage est optionnel
+    image = models.ImageField(upload_to='produits/') # le champ immage est optionnel
     #la fonction upload_to est utilisé pour stocker les images de produits dans un répertoire
 
     # Quantité en stock

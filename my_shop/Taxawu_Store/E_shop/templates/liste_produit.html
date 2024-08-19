@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des produits</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des produits</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produit in produits %}
+            <tr>
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.prix }} CFA</td>
+                <td>
+                    <a href="{% url 'detail_produit' produit.id %}">Voir les détails</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
