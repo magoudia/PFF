@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon E-commerce{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'liste_produit' %}">Mon E-commerce</a></h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'liste_produit' %}">Accueil</a></li>
+                <li><a href="{% url 'mon_compte' %}">Mon Compte</a></li>
+                <li><a href="{% url 'panier' %}">Panier</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Mon E-commerce</p>
+    </footer>
+</body>
+</html>

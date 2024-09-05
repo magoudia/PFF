@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des commandes</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des commandes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom de l'utilisateur</th>
+                <th>Total des commandes</th>
+                <th>Statu</th>
+                <th>Date commande</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.utilisateur }}</td>
+                <td>{{ commande.total }} </td>
+                <td>{{ commande.statut }} </td>
+                <td>{{ commande.date_commande }} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

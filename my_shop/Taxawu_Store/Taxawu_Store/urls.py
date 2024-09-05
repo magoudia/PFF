@@ -20,13 +20,17 @@ from django.contrib import admin
 from django.urls import path,include
 
 from E_shop import views
-from E_shop.views import liste_produit
+from E_shop.views import liste_produit,liste_commande
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('E_shop.urls')),
-    path('produits/', liste_produit, name='liste_produit'),
-     path('produits/<int:pk>/', views.detail_produit, name='detail_produit'),  # Détails du produit
+    path('produits/', views.liste_produit, name='liste_produit'),
+    path('commandes/', liste_commande, name='liste_commande'),
+    path('produits/<int:pk>/', views.detail_produit, name='detail_produit'),  # Détails du produit
+    path('ajouter_au_panier/<int:produit_id>/', views.ajouter_au_panier, name='ajouter_au_panier'),
+    path('mon-compte/', views.mon_compte, name='mon_compte'),
+    path('panier/', views.panier, name='panier'),
 
 ]

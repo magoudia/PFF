@@ -1,0 +1,33 @@
+{% extends "home.html" %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block content %}
+<h1>Mon Panier</h1>
+{% if panier.ligne_panier_set.count > 0 %}
+<table>
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ligne in panier.ligne_panier_set.all %}
+        <tr>
+            <td>{{ ligne.produit.nom }}</td>
+            <td>{{ ligne.quantite }}</td>
+            <td>{{ ligne.produit.prix }}€</td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>Total : {{ total }}€</p>
+<a href="{% url 'paiement' %}">Passer à la caisse</a>
+{% else %}
+<p>Votre panier est vide.</p>
+{% endif %}
+{% endblock %}

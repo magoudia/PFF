@@ -7,6 +7,7 @@
     <title>Détails du produit</title>
 </head>
 <body>
+   
     <h1>{{ produit.nom }}</h1>
     <p>{{ produit.description }}</p>
     <p>Prix : {{ produit.prix }} CFA</p>
@@ -14,5 +15,9 @@
     <img src="{{ produit.image.url }}" alt="{{ produit.nom }}">
     <br>
     <a href="{% url 'liste_produit' %}">Retour à la liste des produits</a>
+    <form method="POST" action="{% url 'ajouter_au_panier' produit.id %}">
+        {% csrf_token %}
+        <button type="submit" style="background-color: blue;color:white;border:none;height: 50px;width: 150px;margin-top: 50px;border-radius: 16px;">Ajouter au panier</button>
+    </form>
 </body>
 </html>

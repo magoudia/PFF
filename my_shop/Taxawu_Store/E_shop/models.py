@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.conf import settings
+
 # Create your models here.
 
 # Modèle représentant une catégorie de produits
@@ -33,7 +35,8 @@ class Produit(models.Model):
     # Catégorie du produit (relation avec le modèle Categorie)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     # Date à laquelle le produit a été ajouté
-    date_ajout = models.DateTimeField(auto_now_add=True) # le auto_now_add=True montre que le champ ser automatiquement rempli 
+    date_ajout = models.DateTimeField(auto_now_add=True) # le auto_now_add=True montre que le champ ser automatiquement rempli
+    disponible = models.BooleanField(default=True, verbose_name="Disponible") 
 
 
     def __str__(self):
@@ -44,15 +47,35 @@ class Produit(models.Model):
 
 # Modèle représentant un panier d'achat pour un utilisateur
 class Panier(models.Model):
-    # Utilisateur propriétaire du panier (relation avec le modèle User)
-    utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Date de création du panier
-    date_creation = models.DateTimeField(auto_now_add=True) # le auto_now_add=True montre que le champ ser automatiquement rempli
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+    produits = models.ManyToManyField(Produit, through='LignePanier')
+
+    def ajouter(self, produit, quantite=1):
+        ligne, created = LignePanier.objects.get_or_create(
+            panier=self,
+            produit=produit,
+            defaults={'quantite': quantite}
+        )
+        if not created:
+            ligne.quantite += quantite
+            ligne.save()
+
+    class Meta:
+        abstract = False
+
+    
 
     def __str__(self):
         return f"Panier de {self.utilisateur}"  # Affiche le propriétaire du panier
 
 
+
+class LignePanier(models.Model):
+    panier = models.ForeignKey(Panier, on_delete=models.CASCADE)
+    produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
+    quantite = models.PositiveIntegerField()
+
+    
 
 
 # Modèle représentant une commande passée par un utilisateur
@@ -75,3 +98,8 @@ class Commande(models.Model):
 
     def __str__(self):
         return f"Commande de {self.utilisateur} le {self.date_commande}"  # Affiche un résumé de la commande
+
+
+
+
+

@@ -1,0 +1,22 @@
+{% extends "home.html" %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block content %}
+<h1>Mon Compte</h1>
+<p>Bonjour, {{ user.username }} !</p>
+
+<h2>Mes informations personnelles</h2>
+<p>Email : {{ user.email }}</p>
+<!-- Formulaire pour modifier les informations personnelles -->
+
+<h2>Mes commandes</h2>
+<ul>
+    {% for commande in commandes %}
+    <li>
+        Commande {{ commande.id }} - {{ commande.date_commande }} - {{ commande.statut }}
+        <a href="{% url 'detail_commande' commande.id %}">Voir les détails</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
